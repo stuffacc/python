@@ -1,0 +1,17 @@
+# .github/workflows/simple-test.yml
+ name: Simple Test
+
+ on:
+   push:
+     branches: [ heap_sort ]
+
+ jobs:
+   test:
+     runs-on: ubuntu-latest
+     steps:
+     - uses: actions/checkout@v4
+     - uses: actions/setup-python@v4
+       with:
+         python-version: '3.12.3'
+     - run: pip install pytest
+     - run: pytest test_heap_sort.py -v
