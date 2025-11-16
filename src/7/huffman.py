@@ -1,7 +1,3 @@
-from email.quoprimime import decodestring
-from locale import windows_locale
-
-
 class Node:
     def __init__(self, char, weight, left=None, right=None):
         self.char = char
@@ -116,13 +112,12 @@ def decode_file(filepath):
         with open("decoded.txt", "w") as f:
             f.write(decoded_str)
 
-str, table = encode("Hello fsdfdfsdfsdfsdfsdfsdfsdfdsfsdfdsfWorld")
+string, table = encode("Hello fsdfdfsdfsdfsdfsdfsdfsdfdsfsdfdsfWorld")
 
-decodestring = decode(str, table)
-
-print(decodestring)
+decoded_string = decode(string, table)
+print(decoded_string)
 
 
 encode_file("file.txt")
-
 decode_file("encoded.huff")
+
