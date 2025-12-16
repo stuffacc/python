@@ -76,3 +76,93 @@ print(len(a))
 
 # 7 за 26 секунд
 # 8 за 14 минут
+
+
+
+
+
+
+
+
+# решение 2  -------- O(n!)
+
+
+def is_valid(board, row, col):
+    # Проверка наличия ферзя в данной строке
+    for i in range(col):
+        if board[row][i] == 1:
+            return False
+    
+    # Проверка по главной диагонали
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
+    
+    # Проверка по побочной диагонали
+    for i, j in zip(range(row, len(board)), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
+    
+    return True
+
+def solve_n_queens_util(board, col):
+    # Если все ферзи расставлены
+    if col >= len(board):
+        return 1
+    
+    count = 0
+    for row in range(len(board)):
+        if is_valid(board, row, col):
+            # Расставление ферзя
+            board[row][col] = 1
+            
+            # В следующий столбец
+            count += solve_n_queens_util(board, col + 1)
+            # Удаление ферзя
+            board[row][col] = 0
+            
+    return count
+
+def solve_n_queens(n):
+    board = [[0 for _ in range(n)] for _ in range(n)]
+    return solve_n_queens_util(board, 0)
+
+print(solve_n_queens(n))
+
+# Решение 3 ---------- O(1)
+
+def solve_n_queens_constant(n):
+    solutions = {
+        1: 1,
+        2: 0,
+        3: 0,
+        4: 2,
+        5: 10,
+        6: 4,
+        7: 40,
+        8: 92,
+        9: 352,
+        10: 724,
+        11: 2680,
+        12: 14200,
+        13: 73712,
+        14: 365596,
+        15: 2279184,
+        16: 14772512,
+        17: 95815104,
+        18: 666090624,
+        19: 4968057848,
+        20: 39029188884,
+        21: 314666222712,
+        22: 2691008701644,
+        23: 24233937684440,
+        24: 227514171973736,
+        25: 2207893435808352,
+        26: 22317699616364044,
+        27: 234907967154122528
+}
+    return solutions.get(n, 0)
+
+print(solve_n_queens_constant(n))
+
+
